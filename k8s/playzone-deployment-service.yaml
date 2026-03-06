@@ -1,0 +1,49 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: play-zone
+  namespace: play-zone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: play-zone
+  template:
+    metadata:
+      labels:
+        app: play-zone
+    spec:
+      containers:
+        - name: play-zone
+          image: ayeshaazad/play-zone:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: "Development"
+            - name: ASPNETCORE_URLS
+              value: "http://+:8080"
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=sql-server,1433;Database=PlayZone;User Id=sa;Password=PlayZone@123;TrustServerCertificate=True"
+          volumeMounts:
+            - name: game-images
+              mountPath: /app/wwwroot/assets/images/games
+      volumes:
+        - name: game-images
+          persistentVolumeClaim:
+            claimName: playzone-images-pvc
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: play-zone
+  namespace: play-zone
+spec:
+  selector:
+    app: play-zone
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP

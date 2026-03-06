@@ -1,0 +1,63 @@
+# Build output
+
+bin/
+obj/
+
+# User-specific files
+
+_.user
+_.suo
+_.userosscache
+_.sln.docstates
+
+# Logs
+
+\*.log
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Git
+
+.git
+.gitignore
+
+# Docker
+
+Dockerfile
+docker-compose\*
+.dockerignore
+
+# IDE folders
+
+.vscode
+.idea
+.vs
+
+# Node modules (if frontend exists)
+
+node_modules/
+
+# Test results
+
+TestResults/
+
+# Coverage reports
+
+coverage/
+
+# Environment variables
+
+.env
+
+# Temporary files
+
+_.tmp
+_.temp
+
+# Kubernetes configs (optional if separate)
+
+_.yaml
+_.yml

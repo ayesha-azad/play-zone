@@ -1,0 +1,43 @@
+services:
+  play-zone:
+    image: ayeshaazad/play-zone:latest
+    build: .
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - sql-server
+    networks:
+      - play-zone-network
+
+  sql-server:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: sql-server
+    user: root
+    environment:
+      SA_PASSWORD: "PlayZone@123"
+      ACCEPT_EULA: "Y"
+    ports:
+      - "1433:1433"
+    volumes:
+      - sql-data:/var/opt/mssql
+    networks:
+      - play-zone-network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'PlayZone@123' -Q 'SELECT 1'",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  sql-data:
+
+networks:
+  play-zone-network:
+    driver: bridge
