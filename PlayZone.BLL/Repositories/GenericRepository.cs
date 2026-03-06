@@ -22,8 +22,8 @@ namespace PlayZone.BLL.Repositories
         {
             if (typeof(T) == typeof(Game))
             {
-                return (ICollection<T>) await _dbContext.Games
-                    .Include(G=> G.Category)
+                return (ICollection<T>)await _dbContext.Games
+                    .Include(G => G.Category)
                     .Include(g => g.Device)
                     .ThenInclude(gd => gd.Device)
                     .ToListAsync();

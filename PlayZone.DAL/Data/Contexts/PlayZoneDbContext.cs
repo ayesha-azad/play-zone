@@ -54,7 +54,7 @@ namespace PlayZone.DAL.Data.Contexts
                 .HasKey(gd => new { gd.GameId, gd.DeviceId });
 
             base.OnModelCreating(modelBuilder);
-            
+
         }
     }
 }

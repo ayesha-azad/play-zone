@@ -102,8 +102,8 @@ namespace PlayZone.PL.Controllers
 
         [HttpGet]
         public async Task<IActionResult> Details(Guid Id)
-        { 
-            if(Id == Guid.Empty)
+        {
+            if (Id == Guid.Empty)
             {
                 return NotFound();
             }
