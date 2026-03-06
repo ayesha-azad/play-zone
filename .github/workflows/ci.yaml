@@ -30,7 +30,7 @@ jobs:
       - name: .NET Lint
         uses: zyactions/dotnet-lint@v1
         with:
-          workspace: "PlayZone.PL/PlayZone.PL.csproj"
+          workspace: PlayZone.sln
           implicit-restore: true
 
       - name: Docker Login
